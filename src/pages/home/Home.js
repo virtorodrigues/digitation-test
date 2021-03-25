@@ -2,13 +2,15 @@ import React from 'react';
 import Text from './Text';
 import text from './Text';
 import { useText } from './util';
+import './home.css';
 
 function Home() {
   const [digitation, setDigitation] = React.useState('');
-
   const [errorWord, setErrorWord] = React.useState(false);
 
-  const { verifyWordCorrect } = useText({ text: text() });
+  const {
+    verifyWordCorrect, getTextSplited, getListWordsValidate, getIndex,
+  } = useText({ text: text() });
 
   const handleDigitation = (e) => {
     const wordTyped = e.target.value;
@@ -30,7 +32,15 @@ function Home() {
   return (
     <div style={{ fontSize: 22, width: '100%' }}>
       <div>
-        <Text />
+        {getTextSplited().map((subString, index) => {
+          const useClaseName = getListWordsValidate().find((i) => i.index === index).status;
+          const isWriting = getIndex() === index ? 'writing' : '';
+          return (
+            <div className={`${isWriting} ${useClaseName}`}>
+              {` ${subString} `}
+            </div>
+          );
+        })}
       </div>
       <div style={{ marginTop: 30 }}>
         <input
@@ -42,7 +52,6 @@ function Home() {
           onChange={handleDigitation}
         />
       </div>
-      {errorWord ? <div>ta correto</div> : <div>ta errado</div>}
     </div>
   );
 }

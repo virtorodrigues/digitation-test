@@ -1,0 +1,19 @@
+div {
+  color: black;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+div .error {
+  color: red;
+  font-weight: bolder;
+}
+
+div .success {
+  color: green;
+  font-weight: bolder;
+}
+
+div .writing {
+  background-color: rgba(160, 160, 245, 0.555);
+}
